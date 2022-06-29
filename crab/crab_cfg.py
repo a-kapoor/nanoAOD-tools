@@ -1,10 +1,17 @@
-from WMCore.Configuration import Configuration
-from CRABClient.UserUtilities import config, getUsernameFromSiteDB
+import CRABClient
+from CRABClient.UserUtilities import Configuration
 
+
+datasets = {
+'DYJetsToLL_1J_TuneCP5_13TeV-amcatnloFXFX-pythia8_' : '/DYJetsToLL_1J_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17NanoAOD-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/NANOAODSIM'
+}
+
+key='DYJetsToLL_1J_TuneCP5_13TeV-amcatnloFXFX-pythia8__'
+
+print key
 config = Configuration()
-
 config.section_("General")
-config.General.requestName = 'NanoPost1'
+config.General.requestName = 'crabNanoPost1_'+key
 config.General.transferLogs = True
 config.section_("JobType")
 config.JobType.pluginName = 'Analysis'
@@ -20,15 +27,16 @@ config.Data.inputDBS = 'global'
 config.Data.splitting = 'FileBased'
 #config.Data.splitting = 'EventAwareLumiBased'
 config.Data.unitsPerJob = 2
-config.Data.totalUnits = 10
+#config.Data.totalUnits = 10
 
-config.Data.outLFNDirBase = '/store/user/%s/NanoPost' % (
-    getUsernameFromSiteDB())
+#config.Data.outLFNDirBase = '/store/user/%s/NanoPost2022' % (
+#    username)
 config.Data.publication = False
 config.Data.outputDatasetTag = 'NanoTestPost'
 config.section_("Site")
-config.Site.storageSite = "T2_DE_DESY"
+config.Site.storageSite = "T2_CN_Beijing"
 
 #config.Site.storageSite = "T2_CH_CERN"
 # config.section_("User")
 #config.User.voGroup = 'dcms'
+
